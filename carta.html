@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Para mi lunita 🌙</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+font-family:'Poppins', sans-serif;
+background:url("fondo.jpg") center/cover no-repeat;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+color:white;
+}
+
+/* capa oscura */
+
+body::after{
+content:"";
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,40,0.45);
+z-index:-1;
+}
+
+/* luna */
+
+.moon{
+position:absolute;
+top:40px;
+right:60px;
+width:90px;
+height:90px;
+background:white;
+border-radius:50%;
+box-shadow:0 0 40px white;
+}
+
+/* estrellas */
+
+.star{
+position:absolute;
+width:2px;
+height:2px;
+background:white;
+animation:twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:0.2}
+to{opacity:1}
+}
+
+/* sobre */
+
+.envelope{
+width:330px;
+height:210px;
+background:#ff4d88;
+position:relative;
+cursor:pointer;
+border-radius:6px;
+animation:latido 1.5s infinite;
+}
+
+@keyframes latido{
+0%{transform:scale(1)}
+50%{transform:scale(1.05)}
+100%{transform:scale(1)}
+}
+
+.flap{
+position:absolute;
+width:0;
+height:0;
+border-left:165px solid transparent;
+border-right:165px solid transparent;
+border-bottom:105px solid #ff1a66;
+top:-105px;
+transition:1s;
+}
+
+.envelope.open{
+animation:none;
+}
+
+.envelope.open .flap{
+transform:rotateX(180deg);
+transform-origin:bottom;
+}
+
+/* carta */
+
+.letter{
+position:absolute;
+background:white;
+color:#333;
+width:300px;
+height:420px;
+left:15px;
+bottom:-420px;
+padding:25px;
+overflow:auto;
+border-radius:12px;
+transition:1s;
+}
+
+.envelope.open .letter{
+bottom:25px;
+}
+
+h1{
+font-family:'Great Vibes';
+color:#c2185b;
+text-align:center;
+font-size:40px;
+}
+
+p{
+font-size:14px;
+line-height:1.6;
+}
+
+#contador{
+text-align:center;
+font-size:16px;
+margin-bottom:10px;
+color:#c2185b;
+font-weight:bold;
+}
+
+/* corazones */
+
+.heart{
+position:absolute;
+bottom:-10px;
+font-size:20px;
+animation:flotar 6s linear infinite;
+}
+
+@keyframes flotar{
+0%{transform:translateY(0);opacity:1}
+100%{transform:translateY(-100vh);opacity:0}
+}
+
+/* pétalos */
+
+.petalo{
+position:absolute;
+top:-20px;
+font-size:18px;
+animation:caer 8s linear infinite;
+}
+
+@keyframes caer{
+0%{transform:translateY(0) rotate(0deg)}
+100%{transform:translateY(110vh) rotate(360deg)}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="moon"></div>
+
+<div class="envelope" onclick="abrirCarta()" id="sobre">
+
+<div class="flap"></div>
+
+<div class="letter">
+
+<h1>Para mi lunita 🌙</h1>
+
+<div id="contador"></div>
+
+<p><b>De Angel tu lov</b></p>
+
+<p>
+Ya 4 mesesitos con esta princesa chiquita, gracias a Dios.
+Te escribo esta cartita para agradecerte por darme los momentos más felices que he tenido en mucho tiempo.
+</p>
+
+<p>
+En estos meses has logrado hacerme sentir el hombre mas feliz del mundo, has llenado mis días de alegría, de risas y de tranquilidad.
+</p>
+
+<p>
+Amo nuestros abrazos de 8 minutos porque siento que solo somos tu y yo en este mundo.
+</p>
+
+<p>
+Eres la persona más especial en mi vida mi lunita brillante.
+</p>
+
+<p>
+Gracias por ser Mirian la mujer tan única que amo con todo mi corazón.
+</p>
+
+<p>
+Con mucho amor<br>
+tu chiquito, tu gordito ❤️
+</p>
+
+</div>
+
+</div>
+
+<script>
+
+/* abrir carta */
+
+function abrirCarta(){
+let sobre=document.getElementById("sobre");
+sobre.classList.toggle("open");
+}
+
+/* contador */
+
+const inicio = new Date("December 14, 2025 00:00:00");
+
+function actualizarContador(){
+
+const ahora = new Date();
+const diff = ahora - inicio;
+
+const dias = Math.floor(diff/(1000*60*60*24));
+const meses = Math.floor(dias/30);
+
+document.getElementById("contador").innerHTML =
+"Llevamos juntos 💖 "+meses+" meses y "+dias+" días";
+
+}
+
+setInterval(actualizarContador,1000);
+
+/* estrellas */
+
+for(let i=0;i<120;i++){
+
+let star=document.createElement("div");
+star.className="star";
+
+star.style.left=Math.random()*100+"vw";
+star.style.top=Math.random()*100+"vh";
+
+document.body.appendChild(star);
+
+}
+
+/* corazones */
+
+function crearCorazon(){
+
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="💖";
+
+heart.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{heart.remove()},6000);
+
+}
+
+setInterval(crearCorazon,800);
+
+/* pétalos */
+
+function crearPetalo(){
+
+let petalo=document.createElement("div");
+petalo.className="petalo";
+petalo.innerHTML="🌹";
+
+petalo.style.left=Math.random()*100+"vw";
+
+document.body.appendChild(petalo);
+
+setTimeout(()=>{petalo.remove()},8000);
+
+}
+
+setInterval(crearPetalo,900);
+
+</script>
+
+</body>
+</html>
